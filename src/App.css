@@ -1,0 +1,23 @@
+.text-desc-movie-banner {
+	display: -webkit-box;
+	max-width: 350px;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.big-banner::before {
+	content: '';
+	inset: 0;
+	position: absolute;
+	background: linear-gradient(to right, red, transparent);
+	z-index: 1;
+}
+
+.card::before {
+	content: '';
+	inset: 0;
+	position: absolute;
+	background: linear-gradient(to top, rgb(4, 24, 54), transparent);
+	z-index: 1;
+}
