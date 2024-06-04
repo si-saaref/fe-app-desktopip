@@ -1,4 +1,28 @@
+import { useState } from 'react';
+import { useUser } from '../hooks/useUser';
+
+import { LuEye } from 'react-icons/lu';
+import { LuEyeOff } from 'react-icons/lu';
+
 export default function Signuppage() {
+	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+
+	const [isShowPassword, setIsShowPassword] = useState(false);
+	// const navigate = useNavigate();
+
+	const { register } = useUser();
+
+	const handleSignUp = async () => {
+		const data = {
+			email,
+			password,
+			username,
+		};
+
+		await register(data);
+	};
 	return (
 		<>
 			<main className='m-auto w-1/2 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
@@ -12,6 +36,8 @@ export default function Signuppage() {
 							type='text'
 							name='username'
 							id='username'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Username'
 						/>
@@ -24,25 +50,43 @@ export default function Signuppage() {
 							type='text'
 							name='email'
 							id='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Email'
 						/>
 					</div>
-					<div className='flex flex-col'>
+					<div className='flex flex-col relative'>
 						<label htmlFor='password' className='text-main-grey'>
 							Password
 						</label>
 						<input
-							type='password'
+							type={`${!isShowPassword ? 'password' : 'text'}`}
 							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 							id='password'
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Password'
 						/>
+						{password.length === 0 ? (
+							''
+						) : !isShowPassword ? (
+							<LuEye
+								className='absolute bottom-2 right-2 cursor-pointer'
+								onClick={() => setIsShowPassword(true)}
+							/>
+						) : (
+							<LuEyeOff
+								className='absolute bottom-2 right-2 cursor-pointer'
+								onClick={() => setIsShowPassword(false)}
+							/>
+						)}
 					</div>
 					<button
 						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
 						// disabled
+						onClick={handleSignUp}
 					>
 						Sign Up
 					</button>

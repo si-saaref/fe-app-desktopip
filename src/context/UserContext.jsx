@@ -1,15 +1,17 @@
 import { createContext, useState } from 'react';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
 	const [user, setUser] = useState(null);
 
-	const login = async () => {
+	const login = async (data) => {
+		console.log(data);
 		setUser('');
 	};
 
-	const register = async () => {
+	const register = async (data) => {
+		console.log(data);
 		setUser('');
 	};
 

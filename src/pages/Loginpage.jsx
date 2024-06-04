@@ -1,14 +1,28 @@
 // import { useNavigate } from 'react-router-dom';
-
 import { useState } from 'react';
+import { useUser } from '../hooks/useUser';
+
+import { LuEye } from 'react-icons/lu';
+import { LuEyeOff } from 'react-icons/lu';
 
 export default function Loginpage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [isShowPassword, setIsShowPassword] = useState(false);
+
 	// const navigate = useNavigate();
 
-	const handleLogin = async () => {};
+	const { login } = useUser();
+
+	const handleLogin = async () => {
+		const data = {
+			email,
+			password,
+		};
+
+		await login(data);
+	};
 
 	return (
 		<>
@@ -31,12 +45,12 @@ export default function Loginpage() {
 							placeholder='Email'
 						/>
 					</div>
-					<div className='flex flex-col'>
+					<div className='flex flex-col relative'>
 						<label htmlFor='password' className='text-main-grey'>
 							Password
 						</label>
 						<input
-							type='password'
+							type={`${!isShowPassword ? 'password' : 'text'}`}
 							name='password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
@@ -44,6 +58,19 @@ export default function Loginpage() {
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Password'
 						/>
+						{password.length === 0 ? (
+							''
+						) : !isShowPassword ? (
+							<LuEye
+								className='absolute bottom-2 right-2 cursor-pointer'
+								onClick={() => setIsShowPassword(true)}
+							/>
+						) : (
+							<LuEyeOff
+								className='absolute bottom-2 right-2 cursor-pointer'
+								onClick={() => setIsShowPassword(false)}
+							/>
+						)}
 					</div>
 					<button
 						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
