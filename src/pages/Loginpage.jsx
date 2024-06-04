@@ -1,7 +1,14 @@
 // import { useNavigate } from 'react-router-dom';
 
+import { useState } from 'react';
+
 export default function Loginpage() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
 	// const navigate = useNavigate();
+
+	const handleLogin = async () => {};
 
 	return (
 		<>
@@ -16,6 +23,10 @@ export default function Loginpage() {
 							type='text'
 							name='email'
 							id='email'
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
+							value={email}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Email'
 						/>
@@ -27,6 +38,8 @@ export default function Loginpage() {
 						<input
 							type='password'
 							name='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 							id='password'
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Password'
@@ -35,6 +48,7 @@ export default function Loginpage() {
 					<button
 						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
 						// disabled
+						onClick={handleLogin}
 					>
 						Sign In
 					</button>
