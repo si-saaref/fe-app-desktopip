@@ -10,6 +10,9 @@ export default {
 				'main-grey': '#888',
 			},
 		},
+		fontFamily: {
+			gabarito: ['Gabarito', 'sans-serif'],
+		},
 	},
 	plugins: [],
 };

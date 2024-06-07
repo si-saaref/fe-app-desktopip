@@ -1,17 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+* {
+	font-family: 'Gabarito', sans-serif;
+}
+
 .text-desc-movie-banner {
 	display: -webkit-box;
-	max-width: 350px;
 	-webkit-line-clamp: 4;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+	@apply max-w-[75vw] lg:max-w-[20vw];
 }
 
-.big-banner::before {
+.big-banner::after {
 	content: '';
 	inset: 0;
 	position: absolute;
-	background: linear-gradient(to right, red, transparent);
 	z-index: 1;
+	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-30% to-transparent lg:bg-gradient-to-r;
 }
 
 .card::before {
@@ -20,4 +26,8 @@
 	position: absolute;
 	background: linear-gradient(to top, rgb(4, 24, 54), transparent);
 	z-index: 1;
+}
+
+.indicator-slideshow.active {
+	@apply bg-main-yellow;
 }

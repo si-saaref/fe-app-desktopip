@@ -11,7 +11,7 @@ function App() {
 		<>
 			<Router>
 				<Navbar />
-				<main className='bg-main-blue h-full'>
+				<main className='bg-main-blue h-full min-h-screen'>
 					<Routes>
 						<Route path='*' element={<Homepage />} />
 						<Route path='/' element={<Homepage />} />
