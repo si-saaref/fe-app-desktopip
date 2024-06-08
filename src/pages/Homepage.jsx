@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { MdPlayArrow } from 'react-icons/md';
 import { Zoom } from 'react-slideshow-image';
+import { BsShare } from 'react-icons/bs';
+
 import 'react-slideshow-image/dist/styles.css';
 
 export default function Homepage() {
@@ -11,7 +13,7 @@ export default function Homepage() {
 
 	return (
 		<>
-			<div className='w-[90%] m-auto pt-40 lg:pt-0 lg:w-full'>
+			<div className='w-[90%] m-auto pt-28 lg:pt-0 lg:w-full'>
 				<Zoom
 					arrows={false}
 					indicators={() => (
@@ -45,7 +47,7 @@ export default function Homepage() {
 									Play
 								</button>
 								<button className='bg-transparent border-2 border-main-yellow rounded-full py-2 font-bold flex gap-1 items-center text-main-yellow min-w-32 justify-center'>
-									<MdPlayArrow size={20} className='text-main-yellow' />
+									<BsShare size={20} className='text-main-yellow' />
 									Share
 								</button>
 							</div>
