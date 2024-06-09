@@ -1,40 +1,67 @@
-import { useEffect } from 'react';
 import { BsShare } from 'react-icons/bs';
 import { MdPlayArrow } from 'react-icons/md';
-import { Zoom } from 'react-slideshow-image';
-// import { useMediaQuery } from 'react-responsive';
 import 'react-multi-carousel/lib/styles.css';
 
 import Carousel from 'react-multi-carousel';
 import 'react-slideshow-image/dist/styles.css';
 
 export default function Homepage() {
-	// const isDesktopOrLaptop = useMediaQuery({
-	// 	query: '(min-width: 1024px)',
-	// });
-
-	// const isTablet = useMediaQuery({
-	// 	query: '(min-width: 800px)',
-	// });
-
-	useEffect(() => {
-		const bigBanner = document.querySelector('.big-banner');
-		bigBanner.style.backgroundImage = '/img.jpg';
-	}, []);
-
 	return (
 		<>
 			<div className='w-[90%] m-auto pt-28 lg:pt-0 lg:w-full'>
-				<Zoom
+				<Carousel
+					additionalTransfrom={0}
 					arrows={false}
-					indicators={() => (
-						<div className='indicator-slideshow w-4 h-4 bg-white mr-3 rounded-full'></div>
-					)}
-					scale={1.4}
-					autoplay={false}
+					autoPlaySpeed={3000}
+					centerMode={false}
+					className=''
+					containerClass='container max-w-full'
+					customDot={<CustomDot />}
+					dotListClass='flex gap-2 bottom-5 justify-start px-10 lg:px-20 lg:bottom-16'
+					draggable
+					focusOnSelect={false}
+					infinite
+					itemClass=''
+					keyBoardControl
+					minimumTouchDrag={80}
+					pauseOnHover
+					renderArrowsWhenDisabled={false}
+					renderButtonGroupOutside={false}
+					renderDotsOutside={false}
+					responsive={{
+						desktop: {
+							breakpoint: {
+								max: 4000,
+								min: 1024,
+							},
+							items: 1,
+						},
+						mobile: {
+							breakpoint: {
+								max: 464,
+								min: 0,
+							},
+							items: 1,
+						},
+						tablet: {
+							breakpoint: {
+								max: 1024,
+								min: 464,
+							},
+							items: 1,
+						},
+					}}
+					rewind={false}
+					rewindWithAnimation={false}
+					rtl={false}
+					shouldResetAutoplay
+					showDots
+					sliderClass=''
+					slidesToSlide={1}
+					swipeable
 				>
 					<main
-						className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh]'
+						className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh] pb-14'
 						style={{
 							backgroundImage: "url('/img.jpg')",
 							backgroundPosition: 'center',
@@ -64,7 +91,7 @@ export default function Homepage() {
 							</div>
 						</div>
 					</main>
-					{/* <main className='relative big-banner w-full bg-second-blue h-full flex items-center justify-start px-16 rounded-xl'>
+					<main className='relative big-banner w-full bg-second-blue h-full flex items-center justify-start px-16 rounded-xl'>
 						<div className='text-content flex flex-col gap-3 items-start w-1/2 text-white z-10'>
 							<h1 className=' font-extrabold text-6xl'>Vidio Title Vidio Title Vidio Title</h1>
 							<h6>2022 | 2H 3m</h6>
@@ -85,26 +112,18 @@ export default function Homepage() {
 								Play
 							</button>
 						</div>
-					</main> */}
-				</Zoom>
+					</main>
+				</Carousel>
 			</div>
 			<main className='list-movie px-10 py-20 flex gap-10 flex-col'>
 				<h2 className='text-white text-3xl'>Sci-Fi</h2>
-				{/* <div className='flex gap-10'> */}
-				{/* <Slide
-					slidesToScroll={1}
-					slidesToShow={isDesktopOrLaptop ? 4 : isTablet ? 3 : 2}
-					indicators={true}
-					cssClass='list-film-mini'
-					autoplay={false}
-				> */}
 				<Carousel
 					additionalTransfrom={0}
 					arrows
 					autoPlaySpeed={3000}
 					centerMode={false}
 					className=''
-					containerClass='container'
+					containerClass='container max-w-full'
 					dotListClass=''
 					draggable
 					focusOnSelect={false}
@@ -154,7 +173,10 @@ export default function Homepage() {
 				>
 					<div className='relative card  h-full'>
 						<img src='/img.jpg' alt='' />
-						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 1</h2>
+						<div className='flex absolute bottom-6 left-3 z-10 gap-5'>
+							<h2 className='text-white text-3xl'>Vidio 1</h2>
+							<button className='px-3 py-1 bg-main-yellow rounded-lg'>Exclusive</button>
+						</div>
 					</div>
 					<div className='relative card  h-full'>
 						<img src='/img.jpg' alt='' />
@@ -181,13 +203,18 @@ export default function Homepage() {
 						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 098</h2>
 					</div>
 				</Carousel>
-				{/* </Slide> */}
-				{/* </div> */}
-				{/* <div className='relative card w-80 h-full'>
-					<img src='/img.jpg' alt='' />
-					<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
-				</div> */}
 			</main>
 		</>
 	);
 }
+
+const CustomDot = ({ onClick, active }) => {
+	return (
+		<li
+			className={`${
+				active ? 'active' : 'inactive'
+			} indicator-slideshow w-5 h-5 rounded-full bg-slate-200 cursor-pointer`}
+			onClick={() => onClick()}
+		/>
+	);
+};

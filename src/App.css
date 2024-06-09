@@ -39,3 +39,14 @@ body {
 /* .list-film-mini .images-wrap.horizontal {
 	@apply flex gap-10;
 } */
+
+div:has(.indicators) {
+	position: relative;
+}
+
+.indicators:has(.indicator-slideshow) {
+	position: absolute;
+	bottom: 15px;
+	z-index: 99;
+	left: 100px;
+}
