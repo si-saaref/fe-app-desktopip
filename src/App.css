@@ -4,6 +4,10 @@
 	font-family: 'Gabarito', sans-serif;
 }
 
+body {
+	@apply bg-main-blue;
+}
+
 .text-desc-movie-banner {
 	display: -webkit-box;
 	-webkit-line-clamp: 4;

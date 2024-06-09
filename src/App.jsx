@@ -5,13 +5,14 @@ import Loginpage from './pages/Loginpage';
 
 import Signuppage from './pages/Signuppage';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
 	return (
 		<>
 			<Router>
 				<Navbar />
-				<main className='bg-main-blue h-full min-h-screen'>
+				<main className='h-full min-h-screen'>
 					<Routes>
 						<Route path='*' element={<Homepage />} />
 						<Route path='/' element={<Homepage />} />
@@ -19,6 +20,7 @@ function App() {
 						<Route path='/signup/*' element={<Signuppage />} />
 					</Routes>
 				</main>
+				<Footer />
 			</Router>
 		</>
 	);
