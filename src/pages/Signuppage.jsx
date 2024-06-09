@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useUser } from '../hooks/useUser';
 
-import { LuEye } from 'react-icons/lu';
-import { LuEyeOff } from 'react-icons/lu';
+import { LuEye, LuEyeOff } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export default function Signuppage() {
 	const [email, setEmail] = useState('');
@@ -10,19 +11,30 @@ export default function Signuppage() {
 	const [password, setPassword] = useState('');
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const { register } = useUser();
 
 	const handleSignUp = async () => {
+		const isUsernameContainSpace = /\s/g.test(username);
+
+		if (isUsernameContainSpace) {
+			toast.error('Username should not contain space.');
+			return;
+		}
+
 		const data = {
 			email,
 			password,
 			username,
 		};
 
-		await register(data);
+		const response = await register(data);
+		if (response.status === 201) {
+			navigate('/signin');
+		}
 	};
+
 	return (
 		<>
 			<main className='m-auto w-1/2 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
@@ -40,6 +52,7 @@ export default function Signuppage() {
 							onChange={(e) => setUsername(e.target.value)}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Username'
+							autoComplete='off'
 						/>
 					</div>
 					<div className='flex flex-col'>
@@ -54,6 +67,7 @@ export default function Signuppage() {
 							onChange={(e) => setEmail(e.target.value)}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Email'
+							autoComplete='off'
 						/>
 					</div>
 					<div className='flex flex-col relative'>
@@ -68,6 +82,7 @@ export default function Signuppage() {
 							id='password'
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Password'
+							autoComplete='off'
 						/>
 						{password.length === 0 ? (
 							''
@@ -85,7 +100,7 @@ export default function Signuppage() {
 					</div>
 					<button
 						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
-						// disabled
+						disabled={!(username && email && password)}
 						onClick={handleSignUp}
 					>
 						Sign Up

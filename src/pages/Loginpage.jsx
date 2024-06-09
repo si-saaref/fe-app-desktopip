@@ -84,7 +84,7 @@ export default function Loginpage() {
 					</a>
 					<h1 className='text-center text-main-grey'>
 						Don&apos;t have an account?{' '}
-						<a href='/signup' className='text-main-blue'>
+						<a href='/signup' className='text-main-blue hover:underline'>
 							Sign Up
 						</a>
 					</h1>
