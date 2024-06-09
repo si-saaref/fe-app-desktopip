@@ -5,7 +5,7 @@ export default function HamburgerSidebar({ setIsOpenSidebar }) {
 	return (
 		<Portal>
 			<div
-				className='absolute inset-0 backdrop-blur-sm z-30'
+				className='absolute inset-0 backdrop-blur-sm z-30 bg-[#0e122585]'
 				onClick={() => setIsOpenSidebar(false)}
 			>
 				<ul className='list-menu-navbar gap-10 flex absolute bg-second-blue p-10 flex-col rounded-2xl w-3/5 top-8 left-8 lg:hidden text-main-yellow'>

@@ -4,10 +4,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import HamburgerSidebar from '../Sidebar';
+import { useUser } from '../../hooks/useUser';
 
 export default function Navbar() {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
+	const { user, logout } = useUser();
 
 	const [currentPath, setCurrentPath] = useState('');
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -19,7 +21,13 @@ export default function Navbar() {
 
 	const handleClickButton = () => {
 		const targetPath = currentPath === 'signin' ? '/signup' : '/signin';
-		navigate(targetPath);
+
+		if (user !== null) {
+			logout();
+		} else {
+			console.log(user);
+			navigate(targetPath);
+		}
 	};
 
 	return (
@@ -49,7 +57,7 @@ export default function Navbar() {
 					className='bg-main-yellow text-main-blue font-bold px-3 py-1 rounded-3xl'
 					onClick={handleClickButton}
 				>
-					{currentPath === 'signin' ? 'Sign Up' : 'Sign In'}
+					{user !== null ? 'Sign Out' : currentPath === 'signin' ? 'Sign Up' : 'Sign In'}
 				</button>
 			</nav>
 			{isOpenSidebar && <HamburgerSidebar setIsOpenSidebar={setIsOpenSidebar} />}

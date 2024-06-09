@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react';
+/* eslint-disable no-undef */
+import { createContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { loginUser, registerUser } from '../services/api';
 import Cookies from 'js-cookie';
@@ -9,6 +10,15 @@ export const UserContext = createContext();
 export default function UserContextProvider({ children }) {
 	const [user, setUser] = useState(null);
 
+	useEffect(() => {
+		const tokenUser = Cookies.get('tokenUser') ?? '';
+		if (tokenUser) {
+			const token = Buffer.from(tokenUser, 'base64').toString('');
+			const userData = jwtDecode(token);
+			setUser(userData.user);
+		}
+	}, []);
+
 	const login = async (data) => {
 		try {
 			const resp = await loginUser(data);
@@ -18,6 +28,10 @@ export default function UserContextProvider({ children }) {
 				toast.error(resp.message);
 			} else {
 				const { token } = resp.data;
+
+				const encryptToken = token ? Buffer.from(token).toString('base64') : '';
+				Cookies.set('tokenUser', encryptToken);
+
 				const dataUser = jwtDecode(token);
 				setUser(dataUser.user);
 			}
@@ -47,5 +61,13 @@ export default function UserContextProvider({ children }) {
 		setUser('');
 	};
 
-	return <UserContext.Provider value={{ user, login, register }}>{children}</UserContext.Provider>;
+	const logout = () => {
+		Cookies.remove('tokenUser');
+	};
+
+	return (
+		<UserContext.Provider value={{ user, login, register, logout }}>
+			{children}
+		</UserContext.Provider>
+	);
 }
