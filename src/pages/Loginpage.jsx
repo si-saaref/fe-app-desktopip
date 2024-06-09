@@ -4,6 +4,7 @@ import { useUser } from '../hooks/useUser';
 
 import { LuEye } from 'react-icons/lu';
 import { LuEyeOff } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 export default function Loginpage() {
 	const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ export default function Loginpage() {
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const { login } = useUser();
 
@@ -21,7 +22,10 @@ export default function Loginpage() {
 			password,
 		};
 
-		await login(data);
+		const response = await login(data);
+		if (response.status === 200) {
+			navigate('/');
+		}
 	};
 
 	return (
