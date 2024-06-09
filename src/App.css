@@ -35,3 +35,7 @@ body {
 .indicator-slideshow.active {
 	@apply bg-main-yellow;
 }
+
+/* .list-film-mini .images-wrap.horizontal {
+	@apply flex gap-10;
+} */

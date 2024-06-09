@@ -1,11 +1,22 @@
 import { useEffect } from 'react';
+import { BsShare } from 'react-icons/bs';
 import { MdPlayArrow } from 'react-icons/md';
 import { Zoom } from 'react-slideshow-image';
-import { BsShare } from 'react-icons/bs';
+// import { useMediaQuery } from 'react-responsive';
+import 'react-multi-carousel/lib/styles.css';
 
+import Carousel from 'react-multi-carousel';
 import 'react-slideshow-image/dist/styles.css';
 
 export default function Homepage() {
+	// const isDesktopOrLaptop = useMediaQuery({
+	// 	query: '(min-width: 1024px)',
+	// });
+
+	// const isTablet = useMediaQuery({
+	// 	query: '(min-width: 800px)',
+	// });
+
 	useEffect(() => {
 		const bigBanner = document.querySelector('.big-banner');
 		bigBanner.style.backgroundImage = '/img.jpg';
@@ -77,19 +88,105 @@ export default function Homepage() {
 					</main> */}
 				</Zoom>
 			</div>
-			<main className='list-movie px-10 py-20 flex gap-10'>
-				<div className='relative card w-80 h-full'>
+			<main className='list-movie px-10 py-20 flex gap-10 flex-col'>
+				<h2 className='text-white text-3xl'>Sci-Fi</h2>
+				{/* <div className='flex gap-10'> */}
+				{/* <Slide
+					slidesToScroll={1}
+					slidesToShow={isDesktopOrLaptop ? 4 : isTablet ? 3 : 2}
+					indicators={true}
+					cssClass='list-film-mini'
+					autoplay={false}
+				> */}
+				<Carousel
+					additionalTransfrom={0}
+					arrows
+					autoPlaySpeed={3000}
+					centerMode={false}
+					className=''
+					containerClass='container'
+					dotListClass=''
+					draggable
+					focusOnSelect={false}
+					infinite={false}
+					itemClass=''
+					keyBoardControl
+					minimumTouchDrag={80}
+					pauseOnHover
+					renderArrowsWhenDisabled={false}
+					renderButtonGroupOutside={false}
+					renderDotsOutside={false}
+					responsive={{
+						desktop: {
+							breakpoint: {
+								max: 3000,
+								min: 1024,
+							},
+							items: 3,
+							partialVisibilityGutter: 40,
+						},
+						mobile: {
+							breakpoint: {
+								max: 464,
+								min: 0,
+							},
+							items: 1,
+							partialVisibilityGutter: 30,
+						},
+						tablet: {
+							breakpoint: {
+								max: 1024,
+								min: 464,
+							},
+							items: 2,
+							partialVisibilityGutter: 30,
+						},
+					}}
+					rewind={false}
+					rewindWithAnimation={false}
+					rtl={false}
+					shouldResetAutoplay
+					showDots={false}
+					// sliderClass=''
+					sliderClass='flex gap-10'
+					slidesToSlide={1}
+					swipeable
+				>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 1</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 2</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 4</h2>
+					</div>
+					<div className='relative card  h-full'>
+						<img src='/img.jpg' alt='' />
+						<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio 098</h2>
+					</div>
+				</Carousel>
+				{/* </Slide> */}
+				{/* </div> */}
+				{/* <div className='relative card w-80 h-full'>
 					<img src='/img.jpg' alt='' />
 					<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
-				</div>
-				<div className='relative card w-80 h-full'>
-					<img src='/img.jpg' alt='' />
-					<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
-				</div>
-				<div className='relative card w-80 h-full'>
-					<img src='/img.jpg' alt='' />
-					<h2 className='text-white absolute bottom-6 left-3 z-10'>Vidio Title</h2>
-				</div>
+				</div> */}
 			</main>
 		</>
 	);

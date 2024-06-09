@@ -6,11 +6,16 @@ import { FaTiktok } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 import { BsTelephoneFill } from 'react-icons/bs';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { useMediaQuery } from 'react-responsive';
 
 export default function Footer() {
+	const isTablet = useMediaQuery({
+		query: '(min-width: 800px)',
+	});
+
 	return (
 		<footer className='bg-main-yellow text-main-blue w-full rounded-tl-3xl rounded-tr-3xl'>
-			<div className='p-10 flex flex-col gap-9'>
+			<div className={`p-10 flex-col gap-9  ${isTablet ? 'hidden' : 'flex'}`}>
 				<h1 className='text-center text-4xl font-bold'>MyFlix</h1>
 				<div className='flex flex-col gap-2'>
 					<h2 className='text-main-blue text-xl font-bold'>Follow Us</h2>
