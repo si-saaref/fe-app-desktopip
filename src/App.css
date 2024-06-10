@@ -1,42 +1,68 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+* {
+	font-family: 'Gabarito', sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+	@apply bg-main-blue;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.text-desc-movie-banner {
+	@apply max-w-[75vw] lg:max-w-[20vw] line-clamp-2 lg:line-clamp-4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.big-banner::after {
+	content: '';
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-15% lg:from-40% to-transparent lg:bg-gradient-to-r;
 }
 
-.card {
-  padding: 2em;
+.card::before {
+	content: '';
+	inset: 0;
+	position: absolute;
+	background: linear-gradient(to top, rgb(4, 24, 54), transparent);
+	z-index: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.indicator-slideshow.active {
+	@apply bg-main-yellow;
+}
+
+/* .list-film-mini .images-wrap.horizontal {
+	@apply flex gap-10;
+} */
+
+div:has(.indicators) {
+	position: relative;
+}
+
+.indicators:has(.indicator-slideshow) {
+	position: absolute;
+	bottom: 15px;
+	z-index: 99;
+	left: 100px;
+}
+
+.mini-movie-card:hover > img {
+	transform: scale(1.1);
+}
+
+main:has(.login-wrapper),
+main:has(.signup-wrapper) {
+	background-image: url('/bg-motif-image.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+main:has(.login-wrapper)::before,
+main:has(.signup-wrapper)::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	mix-blend-mode: multiply;
+	@apply bg-second-blue;
 }

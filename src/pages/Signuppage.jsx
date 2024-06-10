@@ -1,32 +1,41 @@
-// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useUser } from '../hooks/useUser';
 
 import { LuEye, LuEyeOff } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import Button from '../components/Button';
 
-export default function Loginpage() {
+export default function Signuppage() {
 	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [isShowPassword, setIsShowPassword] = useState(false);
-
 	const navigate = useNavigate();
-	const { login } = useUser();
 
-	const handleLogin = async () => {
+	const { register } = useUser();
+
+	const handleSignUp = async () => {
 		try {
 			setIsLoading(true);
+			const isUsernameContainSpace = /\s/g.test(username);
+
+			if (isUsernameContainSpace) {
+				toast.error('Username should not contain space.');
+				return;
+			}
+
 			const data = {
 				email,
 				password,
+				username,
 			};
 
-			const response = await login(data);
-			if (response.status === 200) {
-				navigate('/');
+			const response = await register(data);
+			if (response.status === 201) {
+				navigate('/signin');
 			}
 		} catch (error) {
 			console.log(error);
@@ -37,9 +46,24 @@ export default function Loginpage() {
 
 	return (
 		<>
-			<main className='login-wrapper m-auto w-10/12 lg:w-1/3 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
+			<main className='signup-wrapper m-auto w-10/12 lg:w-1/3 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
 				<div className='w-10/12 lg:w-4/5 flex flex-col gap-4'>
-					<h1 className='text-main-blue text-3xl font-bold'>Sign In</h1>
+					<h1 className='text-main-blue text-3xl font-bold'>Sign Up</h1>
+					<div className='flex flex-col'>
+						<label htmlFor='username' className='text-main-grey'>
+							Username
+						</label>
+						<input
+							type='text'
+							name='username'
+							id='username'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
+							placeholder='Username'
+							autoComplete='off'
+						/>
+					</div>
 					<div className='flex flex-col'>
 						<label htmlFor='email' className='text-main-grey'>
 							Email
@@ -48,12 +72,11 @@ export default function Loginpage() {
 							type='text'
 							name='email'
 							id='email'
-							onChange={(e) => {
-								setEmail(e.target.value);
-							}}
 							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Email'
+							autoComplete='off'
 						/>
 					</div>
 					<div className='flex flex-col relative'>
@@ -68,6 +91,7 @@ export default function Loginpage() {
 							id='password'
 							className='w-full rounded-lg border-2 px-2 py-1 text-main-grey'
 							placeholder='Password'
+							autoComplete='off'
 						/>
 						{password.length === 0 ? (
 							''
@@ -83,18 +107,14 @@ export default function Loginpage() {
 							/>
 						)}
 					</div>
-					<Button onClick={handleLogin} isLoading={isLoading} className='hover:border-main-blue'>
-						Sign In
+					<Button
+						disabled={!(username && email && password)}
+						onClick={handleSignUp}
+						isLoading={isLoading}
+						className='hover:border-main-blue'
+					>
+						Sign Up
 					</Button>
-					<a className='text-center text-main-blue' href=''>
-						Forgot Password?
-					</a>
-					<h1 className='text-center text-main-grey'>
-						Don&apos;t have an account?{' '}
-						<a href='/signup' className='text-main-blue hover:underline'>
-							Sign Up
-						</a>
-					</h1>
 				</div>
 			</main>
 		</>

@@ -3,17 +3,26 @@ import './App.css';
 import Homepage from './pages/Homepage';
 import Loginpage from './pages/Loginpage';
 
+import Signuppage from './pages/Signuppage';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import { Toaster } from 'react-hot-toast';
+
 function App() {
 	return (
 		<>
 			<Router>
-				<div className='lg:w-2/5 md:w-2/3 sm:w-full m-auto'>
+				<Navbar />
+				<main className='h-full min-h-screen'>
 					<Routes>
 						<Route path='*' element={<Homepage />} />
 						<Route path='/' element={<Homepage />} />
-						<Route path='/login/*' element={<Loginpage />} />
+						<Route path='/signin/*' element={<Loginpage />} />
+						<Route path='/signup/*' element={<Signuppage />} />
 					</Routes>
-				</div>
+				</main>
+				<Footer />
+				<Toaster />
 			</Router>
 		</>
 	);
