@@ -7,34 +7,34 @@ In repo I use 2 branch, the first one is master as the main branch, and the seco
 
 ## Run Locally
 
-Clone the project
+1. Clone the project
 
 ```bash
   git clone https://github.com/si-saaref/fe-app-desktopip.git
 ```
 
-Go to the project directory
+2. Go to the project directory
 
 ```bash
   cd fe-app-desktopip
 ```
 
-Change branch to dev
+3. Change branch to dev
 
 ```bash
   git fetch --all
   git checkout dev
 ```
 
-Install dependencies
+4. Install dependencies
 
 ```bash
   npm install
 ```
 
-Create file `.env ` in root project copy the list of environment varible from below and paste to your `.env` file
+5. Create file `.env ` in root project copy the list of environment varible from below and paste to your `.env` file
 
-Start the server
+6. Start the server
 
 ```bash
   npm run dev
@@ -46,8 +46,8 @@ To run this project, you have to add some variable name to your environment vari
 
 Edit file `.env-example` (rename the file to `.env`) and change the variable into
 
-`VITE_BASE_URL`=`http://localhost:2112`
-`VITE_KEY`=`0a13539a3d9420231b1c475207d076eb`
-`VITE_MOVIE_URL`=`https://api.themoviedb.org/3/`
-`VITE_BASE_IMAGE_URL`=`https://image.tmdb.org/t/p/w500/`
+`VITE_BASE_URL`=`http://localhost:2112`\
+`VITE_KEY`=`0a13539a3d9420231b1c475207d076eb`\
+`VITE_MOVIE_URL`=`https://api.themoviedb.org/3/`\
+`VITE_BASE_IMAGE_URL`=`https://image.tmdb.org/t/p/w500/`\
 `VITE_DEFAULT_LANGUAGE`=`en-us`
