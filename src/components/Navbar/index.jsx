@@ -24,10 +24,8 @@ export default function Navbar() {
 		const targetPath = currentPath === 'signin' ? '/signup' : '/signin';
 
 		if (user !== null) {
-			console.log(user);
 			logout();
 		} else {
-			console.log(user);
 			navigate(targetPath);
 		}
 	};

@@ -38,8 +38,8 @@ export default function Loginpage() {
 
 	return (
 		<>
-			<main className='m-auto w-1/2 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
-				<div className='w-4/5 flex flex-col gap-4'>
+			<main className='m-auto w-11/12 lg:w-1/3 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
+				<div className='w-10/12 lg:w-4/5 flex flex-col gap-4'>
 					<h1 className='text-main-blue text-3xl font-bold'>Sign In</h1>
 					<div className='flex flex-col'>
 						<label htmlFor='email' className='text-main-grey'>
