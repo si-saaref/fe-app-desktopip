@@ -43,7 +43,7 @@ export const getListMovieBanner = async () => {
 
 export const getListMiniMovie = async () => {
 	const response = await fetch(
-		`${MOVIE_BASE_URL}movie/popular?api_key=${API_KEY}&language=${DEF_LANG}&page=1`
+		`${MOVIE_BASE_URL}movie/upcoming?api_key=${API_KEY}&language=${DEF_LANG}&page=1`
 	);
 	const listMovie = await response.json();
 	return listMovie.results

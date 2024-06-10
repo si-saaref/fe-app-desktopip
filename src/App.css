@@ -9,11 +9,7 @@ body {
 }
 
 .text-desc-movie-banner {
-	display: -webkit-box;
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	@apply max-w-[75vw] lg:max-w-[20vw];
+	@apply max-w-[75vw] lg:max-w-[20vw] line-clamp-2 lg:line-clamp-4;
 }
 
 .big-banner::after {
