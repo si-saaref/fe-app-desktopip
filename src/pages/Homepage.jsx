@@ -2,11 +2,51 @@ import { BsShare } from 'react-icons/bs';
 import { MdPlayArrow } from 'react-icons/md';
 import 'react-multi-carousel/lib/styles.css';
 
+import { useCallback, useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-slideshow-image/dist/styles.css';
 import Button from '../components/Button';
+import { getListMovieBanner } from '../services/api';
+import { useUser } from '../hooks/useUser';
+import toast from 'react-hot-toast';
 
 export default function Homepage() {
+	const { user } = useUser();
+
+	const [listMovie, setListMovie] = useState([]);
+	const [listMiniMovie, setListMiniMovie] = useState([]);
+
+	const fetchAllListMovie = useCallback(async () => {
+		try {
+			const resp = await getListMovieBanner();
+			console.log(resp);
+			setListMovie(resp);
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
+
+	const fetchListMiniMovie = useCallback(async () => {
+		try {
+			const resp = await getListMovieBanner();
+			setListMiniMovie(resp);
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
+
+	useEffect(() => {
+		fetchAllListMovie();
+		fetchListMiniMovie();
+	}, [fetchAllListMovie, fetchListMiniMovie]);
+
+	const handleClickPlay = () => {
+		if (user === null) {
+			toast.error('You have to login first to watch the movie');
+			return;
+		}
+	};
+
 	return (
 		<>
 			<div className='w-[90%] m-auto pt-28 lg:pt-0 lg:w-full'>
@@ -61,59 +101,33 @@ export default function Homepage() {
 					slidesToSlide={1}
 					swipeable
 				>
-					<main
-						className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh] pb-14'
-						style={{
-							backgroundImage: "url('/img.jpg')",
-							backgroundPosition: 'center',
-							backgroundSize: 'cover',
-						}}
-					>
-						<div className='text-content flex flex-col gap-3 items-start w-full lg:w-1/2 text-white z-10'>
-							<h1 className=' font-extrabold text-6xl'>Wadepak</h1>
-							<h6 className='text-main-grey'>2022 | 2H 3m</h6>
-							<p className='text-desc-movie-banner font-light text-main-grey'>
-								Soda and Gembira are two best friends. Lorem ipsum dolor sit amet consectetur,
-								adipisicing elit. Adipisci odio praesentium ratione explicabo quidem nemo non esse
-								deserunt inventore error. Recusandae explicabo praesentium quaerat nulla pariatur
-								dolor laboriosam! Perferendis nemo id reprehenderit consequuntur excepturi corporis
-								neque facere molestias illum aspernatur tempore, maiores veniam exercitationem quo
-								vel cupiditate ipsum. Illo fugit quo quaerat, quidem,
-							</p>
-							<div className='flex gap-3'>
-								<Button>
-									<MdPlayArrow size={20} />
-									Play
-								</Button>
-								<Button type='ghost'>
-									<BsShare size={20} className='text-main-yellow' />
-									Share
-								</Button>
+					{listMovie.map((movie) => (
+						<main
+							key={movie.id}
+							className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh] pb-14'
+							style={{
+								backgroundImage: `url('${movie.image_thumbnail}')`,
+								backgroundPosition: 'center',
+								backgroundSize: 'cover',
+							}}
+						>
+							<div className='text-content flex flex-col gap-3 items-start w-full lg:w-1/2 text-white z-10'>
+								<h1 className=' font-extrabold text-6xl'>{movie.title}</h1>
+								<h6 className='text-main-grey'>2022 | 2H 3m</h6>
+								<p className='text-desc-movie-banner font-light text-main-grey'>{movie.overview}</p>
+								<div className='flex gap-3'>
+									<Button onClick={handleClickPlay}>
+										<MdPlayArrow size={20} />
+										Play
+									</Button>
+									<Button type='ghost'>
+										<BsShare size={20} className='text-main-yellow' />
+										Share
+									</Button>
+								</div>
 							</div>
-						</div>
-					</main>
-					<main className='relative big-banner w-full bg-second-blue h-full flex items-center justify-start px-16 rounded-xl'>
-						<div className='text-content flex flex-col gap-3 items-start w-1/2 text-white z-10'>
-							<h1 className=' font-extrabold text-6xl'>Vidio Title Vidio Title Vidio Title</h1>
-							<h6>2022 | 2H 3m</h6>
-							<p className='text-desc-movie-banner'>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci odio praesentium
-								ratione explicabo quidem nemo non esse deserunt inventore error. Recusandae
-								explicabo praesentium quaerat nulla pariatur dolor laboriosam! Perferendis nemo id
-								reprehenderit consequuntur excepturi corporis neque facere molestias illum
-								aspernatur tempore, maiores veniam exercitationem quo vel cupiditate ipsum. Illo
-								fugit quo quaerat, quidem, magnam obcaecati fugiat tempora facere alias autem natus
-								similique, accusantium quam cum. Dolorem, dignissimos quae. Nobis voluptas suscipit
-								reprehenderit. Deserunt sint, cupiditate fuga optio illo rerum impedit perspiciatis
-								ad ab, quod quo! Earum adipisci aut dolorum omnis voluptate, eius pariatur dolores.
-								Explicabo dolor ipsum veniam soluta aliquam?
-							</p>
-							<button className='bg-main-yellow text-main-blue rounded-full py-2 px-8 font-bold flex gap-1 items-center'>
-								<MdPlayArrow size={20} />
-								Play
-							</button>
-						</div>
-					</main>
+						</main>
+					))}
 				</Carousel>
 			</div>
 			<main className='list-movie px-10 py-20 flex gap-10 flex-col'>
