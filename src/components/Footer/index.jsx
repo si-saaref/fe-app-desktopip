@@ -26,29 +26,29 @@ export default function Footer() {
 				<div className='flex flex-col gap-2'>
 					<h2 className='text-main-blue text-xl font-bold'>Follow Us</h2>
 					<ul className='flex w-3/5 justify-between px-2'>
-						<FaFacebook size={28} className='cursor-pointer' />
-						<FaInstagram size={28} className='cursor-pointer' />
-						<FaTiktok size={28} className='cursor-pointer' />
-						<FaTwitter size={28} className='cursor-pointer' />
-						<FaYoutube size={28} className='cursor-pointer' />
+						<FaFacebook size={28} className='cursor-pointer text-yellow-grey' />
+						<FaInstagram size={28} className='cursor-pointer text-yellow-grey' />
+						<FaTiktok size={28} className='cursor-pointer text-yellow-grey' />
+						<FaTwitter size={28} className='cursor-pointer text-yellow-grey' />
+						<FaYoutube size={28} className='cursor-pointer text-yellow-grey' />
 					</ul>
 				</div>
 				<div className='flex flex-col gap-2'>
 					<h2 className='text-main-blue text-xl font-bold'>Contact Us</h2>
 					<div className='flex gap-4 items-center px-2'>
 						<MdMail className='text-white cursor-pointer' size={20} />
-						<p>Email to user@mail.com</p>
+						<p className='text-yellow-grey'>Email to user@mail.com</p>
 					</div>
 					<div className='flex gap-4 items-center px-2'>
 						<BsTelephoneFill className='text-white cursor-pointer' size={20} />
-						<p>Call 082143215678</p>
+						<p className='text-yellow-grey'>Call 082143215678</p>
 					</div>
 				</div>
 				<div className='flex flex-col gap-2'>
 					<h2 className='text-main-blue text-xl font-bold'>Address</h2>
 					<div className='flex gap-4 items-center px-2'>
 						<FaMapMarkerAlt className='text-white cursor-pointer' size={20} />
-						<p>Address</p>
+						<p className='text-yellow-grey'>Address</p>
 					</div>
 				</div>
 			</div>

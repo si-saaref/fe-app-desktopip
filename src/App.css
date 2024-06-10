@@ -17,7 +17,7 @@ body {
 	inset: 0;
 	position: absolute;
 	z-index: 1;
-	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-20% to-transparent lg:bg-gradient-to-r;
+	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-40% to-transparent lg:bg-gradient-to-r;
 }
 
 .card::before {
@@ -45,4 +45,8 @@ div:has(.indicators) {
 	bottom: 15px;
 	z-index: 99;
 	left: 100px;
+}
+
+.mini-movie-card:hover > img {
+	transform: scale(1.1);
 }

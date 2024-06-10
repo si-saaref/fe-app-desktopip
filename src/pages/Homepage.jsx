@@ -54,7 +54,7 @@ export default function Homepage() {
 				<Carousel
 					additionalTransfrom={0}
 					arrows={false}
-					autoPlaySpeed={3000}
+					autoPlaySpeed={5000}
 					centerMode={false}
 					className=''
 					containerClass='container max-w-full'
@@ -101,6 +101,7 @@ export default function Homepage() {
 					sliderClass=''
 					slidesToSlide={1}
 					swipeable
+					autoPlay
 				>
 					{listMovie.map((movie) => (
 						<main
@@ -108,14 +109,17 @@ export default function Homepage() {
 							className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh] pb-14'
 							style={{
 								backgroundImage: `url('${movie.image_thumbnail}')`,
-								backgroundPosition: 'center',
-								backgroundSize: 'cover',
+								backgroundPosition: 'right',
+								backgroundSize: '60%',
+								backgroundRepeat: 'no-repeat',
 							}}
 						>
 							<div className='text-content flex flex-col gap-3 items-start w-full lg:w-1/2 text-white z-10'>
 								<h1 className=' font-extrabold text-3xl lg:text-6xl'>{movie.title}</h1>
-								<h6 className='text-main-grey'>2022 | 2H 3m</h6>
-								<p className='text-desc-movie-banner font-light text-main-grey'>{movie.overview}</p>
+								<h6 className='text-[#FFFFFFA8]'>2022 | 2H 3m</h6>
+								<p className='text-desc-movie-banner font-light text-[#FFFFFFA8]'>
+									{movie.overview}
+								</p>
 								<div className='flex gap-3'>
 									<Button onClick={handleClickPlay}>
 										<MdPlayArrow size={20} />

@@ -8,6 +8,7 @@ export default {
 				'second-blue': '#00377E',
 				'main-yellow': '#FFB400',
 				'main-grey': '#888',
+				'yellow-grey': '#BB6002',
 			},
 		},
 		fontFamily: {

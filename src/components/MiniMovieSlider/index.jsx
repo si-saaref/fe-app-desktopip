@@ -15,7 +15,7 @@ export default function MiniMovieSlider({ category, listData }) {
 				draggable
 				focusOnSelect={false}
 				infinite={false}
-				itemClass=''
+				itemClass='h-fit'
 				keyBoardControl
 				minimumTouchDrag={80}
 				pauseOnHover
@@ -59,11 +59,24 @@ export default function MiniMovieSlider({ category, listData }) {
 				swipeable
 			>
 				{listData.map((movie) => (
-					<div className='relative card cursor-pointer h-full' key={movie.id}>
-						<img src={movie.image_thumbnail} alt='' />
+					<div
+						className='mini-movie-card relative card cursor-pointer overflow-hidden h-1/2 rounded'
+						key={movie.id}
+					>
+						<img
+							src={movie.image_thumbnail}
+							alt=''
+							className='duration-500 h-[20rem] object-cover w-full'
+						/>
 						<div className='flex absolute bottom-6 left-3 right-3 z-10 gap-1 lg:gap-5 items-start lg:items-center flex-col lg:flex-row'>
 							<h2 className='text-white text-xl lg:text-3xl'>{movie.title}</h2>
-							<button className='px-3 py-1 bg-main-yellow rounded-lg'>Exclusive</button>
+							<button
+								className={`px-3 py-1 bg-main-yellow rounded-lg ${
+									movie.popularity >= 250 ? 'block' : 'hidden'
+								}`}
+							>
+								Exclusive
+							</button>
 						</div>
 					</div>
 				))}
