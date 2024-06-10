@@ -15,22 +15,31 @@ export default function Homepage() {
 	const { user } = useUser();
 
 	const [listMovie, setListMovie] = useState([]);
-	const [listMiniMovie, setListMiniMovie] = useState([]);
+	const [listPopularMovie, setListPopularMovie] = useState([]);
+	const [listUpcomingMovie, setListUpcomingMovie] = useState([]);
 
 	const fetchAllListMovie = useCallback(async () => {
 		try {
 			const resp = await getListMovieBanner();
-			console.log(resp);
 			setListMovie(resp);
 		} catch (error) {
 			console.log(error);
 		}
 	}, []);
 
-	const fetchListMiniMovie = useCallback(async () => {
+	const fetchListPopular = useCallback(async () => {
 		try {
 			const resp = await getListMiniMovie();
-			setListMiniMovie(resp);
+			setListPopularMovie(resp);
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
+
+	const fetchListUpcomingMovie = useCallback(async () => {
+		try {
+			const resp = await getListMiniMovie(2);
+			setListUpcomingMovie(resp);
 		} catch (error) {
 			console.log(error);
 		}
@@ -38,8 +47,9 @@ export default function Homepage() {
 
 	useEffect(() => {
 		fetchAllListMovie();
-		fetchListMiniMovie();
-	}, [fetchAllListMovie, fetchListMiniMovie]);
+		fetchListPopular();
+		fetchListUpcomingMovie();
+	}, [fetchAllListMovie, fetchListPopular, fetchListUpcomingMovie]);
 
 	const handleClickPlay = () => {
 		if (user === null) {
@@ -63,7 +73,7 @@ export default function Homepage() {
 					draggable
 					focusOnSelect={false}
 					infinite
-					itemClass=''
+					itemClass='rounded-3xl lg:rounded-none overflow-hidden'
 					keyBoardControl
 					minimumTouchDrag={80}
 					pauseOnHover
@@ -106,12 +116,9 @@ export default function Homepage() {
 					{listMovie.map((movie) => (
 						<main
 							key={movie.id}
-							className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 rounded-xl lg:h-[90vh] pb-14'
+							className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 lg:h-[90vh] pb-14 bg-center lg:bg-right bg-cover lg:bg-[length:60%] bg-no-repeat rounded-3xl lg:rounded-none'
 							style={{
 								backgroundImage: `url('${movie.image_thumbnail}')`,
-								backgroundPosition: 'right',
-								backgroundSize: '60%',
-								backgroundRepeat: 'no-repeat',
 							}}
 						>
 							<div className='text-content flex flex-col gap-3 items-start w-full lg:w-1/2 text-white z-10'>
@@ -136,7 +143,8 @@ export default function Homepage() {
 				</Carousel>
 			</div>
 			<div className='list-movie px-10 py-20 flex gap-10 flex-col'>
-				<MiniMovieSlider category='Popular' listData={listMiniMovie} />
+				<MiniMovieSlider category='Popular' listData={listPopularMovie} />
+				<MiniMovieSlider category='Upcoming' listData={listUpcomingMovie} />
 			</div>
 		</>
 	);
@@ -147,7 +155,7 @@ const CustomDot = ({ onClick, active }) => {
 		<li
 			className={`${
 				active ? 'active' : 'inactive'
-			} indicator-slideshow w-5 h-5 rounded-full bg-slate-200 cursor-pointer`}
+			} indicator-slideshow w-2.5 lg:w-4 h-2.5 lg:h-4 rounded-full bg-slate-200 cursor-pointer`}
 			onClick={() => onClick()}
 		/>
 	);

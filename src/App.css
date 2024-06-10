@@ -17,7 +17,7 @@ body {
 	inset: 0;
 	position: absolute;
 	z-index: 1;
-	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-40% to-transparent lg:bg-gradient-to-r;
+	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-15% lg:from-40% to-transparent lg:bg-gradient-to-r;
 }
 
 .card::before {
@@ -49,4 +49,20 @@ div:has(.indicators) {
 
 .mini-movie-card:hover > img {
 	transform: scale(1.1);
+}
+
+main:has(.login-wrapper),
+main:has(.signup-wrapper) {
+	background-image: url('/bg-motif-image.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+main:has(.login-wrapper)::before,
+main:has(.signup-wrapper)::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	mix-blend-mode: multiply;
+	@apply bg-second-blue;
 }

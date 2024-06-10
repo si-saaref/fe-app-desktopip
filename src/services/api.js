@@ -41,9 +41,9 @@ export const getListMovieBanner = async () => {
 		.slice(0, 5);
 };
 
-export const getListMiniMovie = async () => {
+export const getListMiniMovie = async (page = 1) => {
 	const response = await fetch(
-		`${MOVIE_BASE_URL}movie/upcoming?api_key=${API_KEY}&language=${DEF_LANG}&page=1`
+		`${MOVIE_BASE_URL}movie/upcoming?api_key=${API_KEY}&language=${DEF_LANG}&page=${page}`
 	);
 	const listMovie = await response.json();
 	return listMovie.results.map((movie) => ({

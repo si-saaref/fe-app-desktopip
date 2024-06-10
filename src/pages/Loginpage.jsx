@@ -14,7 +14,6 @@ export default function Loginpage() {
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const navigate = useNavigate();
-
 	const { login } = useUser();
 
 	const handleLogin = async () => {
@@ -38,7 +37,7 @@ export default function Loginpage() {
 
 	return (
 		<>
-			<main className='m-auto w-11/12 lg:w-1/3 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
+			<main className='login-wrapper m-auto w-10/12 lg:w-1/3 absolute top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white rounded-3xl h-[80%] flex items-center justify-center'>
 				<div className='w-10/12 lg:w-4/5 flex flex-col gap-4'>
 					<h1 className='text-main-blue text-3xl font-bold'>Sign In</h1>
 					<div className='flex flex-col'>
@@ -84,13 +83,7 @@ export default function Loginpage() {
 							/>
 						)}
 					</div>
-					{/* <button
-						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500 flex justify-center'
-						onClick={handleLogin}
-					>
-						{isLoading ? <AiOutlineLoading className='animate-spin' /> : 'Sign In'}
-					</button> */}
-					<Button onClick={handleLogin} isLoading={isLoading}>
+					<Button onClick={handleLogin} isLoading={isLoading} className='hover:border-main-blue'>
 						Sign In
 					</Button>
 					<a className='text-center text-main-blue' href=''>

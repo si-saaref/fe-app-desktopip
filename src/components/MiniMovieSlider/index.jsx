@@ -15,7 +15,7 @@ export default function MiniMovieSlider({ category, listData }) {
 				draggable
 				focusOnSelect={false}
 				infinite={false}
-				itemClass='h-fit'
+				itemClass='h-fit pr-6'
 				keyBoardControl
 				minimumTouchDrag={80}
 				pauseOnHover
@@ -54,7 +54,8 @@ export default function MiniMovieSlider({ category, listData }) {
 				shouldResetAutoplay
 				showDots={false}
 				// sliderClass=''
-				sliderClass='flex gap-10'
+				// sliderClass=''
+				partialVisbile={false}
 				slidesToSlide={1}
 				swipeable
 			>
@@ -66,7 +67,7 @@ export default function MiniMovieSlider({ category, listData }) {
 						<img
 							src={movie.image_thumbnail}
 							alt=''
-							className='duration-500 h-[20rem] object-cover w-full'
+							className='duration-500 h-[16rem] object-cover w-full '
 						/>
 						<div className='flex absolute bottom-6 left-3 right-3 z-10 gap-1 lg:gap-5 items-start lg:items-center flex-col lg:flex-row'>
 							<h2 className='text-white text-xl lg:text-3xl'>{movie.title}</h2>
