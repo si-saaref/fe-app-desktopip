@@ -32,7 +32,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<nav className='w-[95%] m-auto absolute left-1/2 -translate-x-1/2 top-4 bg-main-blue text-main-yellow flex justify-between px-6 py-4 rounded-lg items-center z-20'>
+			<nav className='w-[95%] m-auto sticky lg:absolute lg:left-1/2 lg:-translate-x-1/2 top-0 lg:top-4 bg-main-blue text-main-yellow flex justify-between px-6 py-4 rounded-lg items-center z-20'>
 				<div className='flex gap-14 justify-between w-1/2 lg:w-auto relative'>
 					<RxHamburgerMenu
 						className='text-white lg:hidden cursor-pointer'

@@ -71,7 +71,7 @@ export default function Homepage() {
 
 	return (
 		<>
-			<div className='w-[90%] m-auto pt-28 lg:pt-0 lg:w-full'>
+			<div className='w-[90%] m-auto pt-16 lg:pt-0 lg:w-full'>
 				<Carousel
 					additionalTransfrom={0}
 					arrows={false}
