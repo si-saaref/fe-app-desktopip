@@ -13,7 +13,7 @@ export const registerUser = async (data) => {
 };
 
 export const loginUser = async (data) => {
-	const response = await fetch(`${BASE_URL}/api/v1/auth/login`, {
+	const response = await fetch(`${BASE_URL}/api/v1/auth/signin`, {
 		method: 'POST',
 		headers: {
 			'Content-type': 'application/json',

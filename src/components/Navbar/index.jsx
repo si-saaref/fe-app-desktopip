@@ -5,6 +5,7 @@ import { TiArrowSortedDown } from 'react-icons/ti';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import HamburgerSidebar from '../Sidebar';
 import { useUser } from '../../hooks/useUser';
+import Button from '../Button';
 
 export default function Navbar() {
 	const { pathname } = useLocation();
@@ -17,12 +18,13 @@ export default function Navbar() {
 	useEffect(() => {
 		const path = pathname.split('/')[1];
 		setCurrentPath(path);
-	}, [pathname]);
+	}, [pathname, user]);
 
 	const handleClickButton = () => {
 		const targetPath = currentPath === 'signin' ? '/signup' : '/signin';
 
 		if (user !== null) {
+			console.log(user);
 			logout();
 		} else {
 			console.log(user);
@@ -41,7 +43,14 @@ export default function Navbar() {
 							setIsOpenSidebar(true);
 						}}
 					/>
-					<h1 className='font-bold text-xl'>Myflix</h1>
+					<h1
+						className='font-bold text-xl cursor-pointer'
+						onClick={() => {
+							navigate('/');
+						}}
+					>
+						Myflix
+					</h1>
 					<ul className='list-menu-navbar gap-7 hidden lg:flex'>
 						<li className='cursor-pointer flex items-center text-xl lg:text-base'>Home</li>
 						<li className='cursor-pointer flex items-center gap-1 text-xl lg:text-base'>
@@ -53,12 +62,9 @@ export default function Navbar() {
 					</ul>
 				</div>
 
-				<button
-					className='bg-main-yellow text-main-blue font-bold px-3 py-1 rounded-3xl'
-					onClick={handleClickButton}
-				>
+				<Button onClick={handleClickButton} className='!min-w-fit px-3'>
 					{user !== null ? 'Sign Out' : currentPath === 'signin' ? 'Sign Up' : 'Sign In'}
-				</button>
+				</Button>
 			</nav>
 			{isOpenSidebar && <HamburgerSidebar setIsOpenSidebar={setIsOpenSidebar} />}
 		</>

@@ -4,34 +4,43 @@ import { useUser } from '../hooks/useUser';
 import { LuEye, LuEyeOff } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Button from '../components/Button';
 
 export default function Signuppage() {
 	const [email, setEmail] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
+	const [isLoading, setIsLoading] = useState(false);
 	const [isShowPassword, setIsShowPassword] = useState(false);
 	const navigate = useNavigate();
 
 	const { register } = useUser();
 
 	const handleSignUp = async () => {
-		const isUsernameContainSpace = /\s/g.test(username);
+		try {
+			setIsLoading(true);
+			const isUsernameContainSpace = /\s/g.test(username);
 
-		if (isUsernameContainSpace) {
-			toast.error('Username should not contain space.');
-			return;
-		}
+			if (isUsernameContainSpace) {
+				toast.error('Username should not contain space.');
+				return;
+			}
 
-		const data = {
-			email,
-			password,
-			username,
-		};
+			const data = {
+				email,
+				password,
+				username,
+			};
 
-		const response = await register(data);
-		if (response.status === 201) {
-			navigate('/signin');
+			const response = await register(data);
+			if (response.status === 201) {
+				navigate('/signin');
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -98,13 +107,13 @@ export default function Signuppage() {
 							/>
 						)}
 					</div>
-					<button
-						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
+					<Button
 						disabled={!(username && email && password)}
 						onClick={handleSignUp}
+						isLoading={isLoading}
 					>
 						Sign Up
-					</button>
+					</Button>
 				</div>
 			</main>
 		</>

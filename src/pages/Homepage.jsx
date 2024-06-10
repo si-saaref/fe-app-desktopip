@@ -4,6 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 
 import Carousel from 'react-multi-carousel';
 import 'react-slideshow-image/dist/styles.css';
+import Button from '../components/Button';
 
 export default function Homepage() {
 	return (
@@ -80,14 +81,14 @@ export default function Homepage() {
 								vel cupiditate ipsum. Illo fugit quo quaerat, quidem,
 							</p>
 							<div className='flex gap-3'>
-								<button className='bg-main-yellow text-main-blue rounded-full py-2 font-bold flex gap-1 items-center min-w-32 justify-center'>
+								<Button>
 									<MdPlayArrow size={20} />
 									Play
-								</button>
-								<button className='bg-transparent border-2 border-main-yellow rounded-full py-2 font-bold flex gap-1 items-center text-main-yellow min-w-32 justify-center'>
+								</Button>
+								<Button type='ghost'>
 									<BsShare size={20} className='text-main-yellow' />
 									Share
-								</button>
+								</Button>
 							</div>
 						</div>
 					</main>

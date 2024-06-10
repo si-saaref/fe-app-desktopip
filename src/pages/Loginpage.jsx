@@ -2,13 +2,14 @@
 import { useState } from 'react';
 import { useUser } from '../hooks/useUser';
 
-import { LuEye } from 'react-icons/lu';
-import { LuEyeOff } from 'react-icons/lu';
+import { LuEye, LuEyeOff } from 'react-icons/lu';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
 
 export default function Loginpage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -17,14 +18,21 @@ export default function Loginpage() {
 	const { login } = useUser();
 
 	const handleLogin = async () => {
-		const data = {
-			email,
-			password,
-		};
+		try {
+			setIsLoading(true);
+			const data = {
+				email,
+				password,
+			};
 
-		const response = await login(data);
-		if (response.status === 200) {
-			navigate('/');
+			const response = await login(data);
+			if (response.status === 200) {
+				navigate('/');
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -76,13 +84,15 @@ export default function Loginpage() {
 							/>
 						)}
 					</div>
-					<button
-						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500'
-						// disabled
+					{/* <button
+						className='bg-main-yellow text-main-blue rounded-full py-2 font-bold disabled:text-main-grey disabled:bg-[#666] duration-500 flex justify-center'
 						onClick={handleLogin}
 					>
+						{isLoading ? <AiOutlineLoading className='animate-spin' /> : 'Sign In'}
+					</button> */}
+					<Button onClick={handleLogin} isLoading={isLoading}>
 						Sign In
-					</button>
+					</Button>
 					<a className='text-center text-main-blue' href=''>
 						Forgot Password?
 					</a>

@@ -63,6 +63,7 @@ export default function UserContextProvider({ children }) {
 
 	const logout = () => {
 		Cookies.remove('tokenUser');
+		setUser(null);
 	};
 
 	return (
