@@ -52,3 +52,14 @@ export const getListMiniMovie = async (page = 1) => {
 	}));
 	// .slice(0, 5);
 };
+
+export const getOneMovie = async (idMovie = 1) => {
+	const response = await fetch(
+		`${MOVIE_BASE_URL}movie/${idMovie}?api_key=${API_KEY}&language=${DEF_LANG}`
+	);
+	const respMovie = await response.json();
+	return {
+		...respMovie,
+		image_thumbnail: `${BASE_IMAGE_URL + respMovie.poster_path}`,
+	};
+};

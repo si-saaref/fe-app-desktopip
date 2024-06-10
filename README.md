@@ -19,22 +19,15 @@ In repo I use 2 branch, the first one is master as the main branch, and the seco
   cd fe-app-desktopip
 ```
 
-3. Change branch to dev
-
-```bash
-  git fetch --all
-  git checkout dev
-```
-
-4. Install dependencies
+3. Install dependencies
 
 ```bash
   npm install
 ```
 
-5. Create file `.env ` in root project copy the list of environment varible from below and paste to your `.env` file
+4. Create file `.env ` in root project copy the list of environment varible from below and paste to your `.env` file
 
-6. Start the server
+5. Start the server
 
 ```bash
   npm run dev

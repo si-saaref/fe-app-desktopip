@@ -8,6 +8,14 @@ body {
 	@apply bg-main-blue;
 }
 
+body:has(.backdrop-portal) {
+	overflow: hidden;
+}
+
+.big-banner-detail .text-desc-movie-banner {
+	@apply max-w-[50vw] line-clamp-2 lg:line-clamp-4;
+}
+
 .text-desc-movie-banner {
 	@apply max-w-[75vw] lg:max-w-[20vw] line-clamp-2 lg:line-clamp-4;
 }
@@ -18,6 +26,14 @@ body {
 	position: absolute;
 	z-index: 1;
 	@apply rounded-xl lg:rounded-none bg-gradient-to-t from-second-blue from-15% lg:from-40% to-transparent lg:bg-gradient-to-r;
+}
+
+.big-banner-detail::after {
+	content: '';
+	inset: 0;
+	position: absolute;
+	z-index: 1;
+	@apply rounded-3xl bg-gradient-to-t from-second-blue from-15% to-transparent;
 }
 
 .card::before {

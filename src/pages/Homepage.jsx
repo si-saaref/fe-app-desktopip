@@ -6,10 +6,11 @@ import { useCallback, useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-slideshow-image/dist/styles.css';
 import Button from '../components/Button';
-import { getListMiniMovie, getListMovieBanner } from '../services/api';
+import { getListMiniMovie, getListMovieBanner, getOneMovie } from '../services/api';
 import { useUser } from '../hooks/useUser';
 import toast from 'react-hot-toast';
 import MiniMovieSlider from '../components/MiniMovieSlider';
+import MovieModal from '../components/MovieModal';
 
 export default function Homepage() {
 	const { user } = useUser();
@@ -17,6 +18,8 @@ export default function Homepage() {
 	const [listMovie, setListMovie] = useState([]);
 	const [listPopularMovie, setListPopularMovie] = useState([]);
 	const [listUpcomingMovie, setListUpcomingMovie] = useState([]);
+	const [isOpenModalMovie, setIsOpenModalMovie] = useState(false);
+	const [dataDetail, setDataDetail] = useState(null);
 
 	const fetchAllListMovie = useCallback(async () => {
 		try {
@@ -51,10 +54,18 @@ export default function Homepage() {
 		fetchListUpcomingMovie();
 	}, [fetchAllListMovie, fetchListPopular, fetchListUpcomingMovie]);
 
-	const handleClickPlay = () => {
-		if (user === null) {
-			toast.error('You have to login first to watch the movie');
-			return;
+	const handleClickPlay = async (idMovie) => {
+		try {
+			if (user === null) {
+				toast.error('You have to login first to watch the movie');
+				return;
+			}
+
+			const resp = await getOneMovie(idMovie);
+			setDataDetail(resp);
+			setIsOpenModalMovie(true);
+		} catch (error) {
+			toast.error(error.message);
 		}
 	};
 
@@ -115,20 +126,20 @@ export default function Homepage() {
 				>
 					{listMovie.map((movie) => (
 						<main
-							key={movie.id}
+							key={movie?.id}
 							className='relative big-banner w-full h-[70vh] flex items-end lg:items-center p-7 justify-start px-7 lg:px-16 lg:h-[90vh] pb-14 bg-center lg:bg-right bg-cover lg:bg-[length:60%] bg-no-repeat rounded-3xl lg:rounded-none'
 							style={{
-								backgroundImage: `url('${movie.image_thumbnail}')`,
+								backgroundImage: `url('${movie?.image_thumbnail}')`,
 							}}
 						>
 							<div className='text-content flex flex-col gap-3 items-start w-full lg:w-1/2 text-white z-10'>
-								<h1 className=' font-extrabold text-3xl lg:text-6xl'>{movie.title}</h1>
+								<h1 className=' font-extrabold text-3xl lg:text-6xl'>{movie?.title}</h1>
 								<h6 className='text-[#FFFFFFA8]'>2022 | 2H 3m</h6>
 								<p className='text-desc-movie-banner font-light text-[#FFFFFFA8]'>
-									{movie.overview}
+									{movie?.overview}
 								</p>
 								<div className='flex gap-3'>
-									<Button onClick={handleClickPlay}>
+									<Button onClick={() => handleClickPlay(movie?.id)}>
 										<MdPlayArrow size={20} />
 										Play
 									</Button>
@@ -146,6 +157,7 @@ export default function Homepage() {
 				<MiniMovieSlider category='Popular' listData={listPopularMovie} />
 				<MiniMovieSlider category='Upcoming' listData={listUpcomingMovie} />
 			</div>
+			{isOpenModalMovie && <MovieModal setIsOpenModal={setIsOpenModalMovie} data={dataDetail} />}
 		</>
 	);
 }
